@@ -1,0 +1,16 @@
+.p-megamenu-vertical {
+    width: fit-content;
+    min-width: fit-content !important;
+}
+
+.p-megamenu {
+    background-color: var(--secondary-background-color);
+}
+
+:root {
+    --p-divider-border-color: var(--text-color) !important;
+}
+
+.app-dark {
+    --p-divider-border-color: var(--text-color) !important;
+}

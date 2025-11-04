@@ -1,0 +1,71 @@
+:root {
+    --primary-background-color: #ffffff;
+    --secondary-background-color: #d0d0d0;
+
+    --text-color: #272C34;
+    --link-color: #5a5a5a;
+    --link-hover-color: #101010;
+
+    --space-3xs: 2px;
+    --space-2xs: 4px;
+    --space-xs: 8px;
+    --space-sm: 12px;
+    --space-md: 16px;
+    --space-lg: 20px;
+    --space-xl: 24px;
+    --space-2xl: 32px;
+    --space-3xl: 40px;
+
+    --shadow-color: #333333;
+    --box-shadow: 1px 1px 2px 0 var(--shadow-color);
+
+    --transition: .3s;
+
+    --border-radius-menu: var(--space-2xs);
+
+    --primary-color: #8D394A;
+    --success-color: #079a40;
+    --secondary-color: #367DFF;
+
+    --text-3xs: 10px;
+    --text-2xs: 11px;
+    --text-xs: 12px;
+
+    --text-sm: 13px;
+    --text-md: 14px;
+
+    --text-lg: 16px;
+    --text-xl: 18px;
+
+    --text-2xl: 20px;
+    --text-3xl: 24px;
+
+    --text-4xl: 28px;
+    --text-5xl: 32px;
+    --text-6xl: 36px;
+
+    --leading-tight: 1.2;
+    --leading-normal: 1.4;
+    --leading-relaxed: 1.6;
+    --leading-loose: 1.8;
+
+    --font-thin: 100;
+    --font-light: 300;
+    --font-normal: 400;
+    --font-medium: 500;
+    --font-semibold: 600;
+    --font-bold: 700;
+    --font-black: 900;
+}
+
+.app-dark {
+    --primary-background-color: #383C46;
+    --secondary-background-color: #272C34;
+
+    --text-color: #d0d0d0;
+    --link-color: #b8b8b8;
+    --link-hover-color: #fafafa;
+
+    --primary-color: #912138;
+    --success-color: #33F37D;
+}
