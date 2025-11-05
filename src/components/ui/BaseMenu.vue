@@ -4,14 +4,40 @@ import type { IMenuItem } from '@/interfases'
 import { useAppState } from '@/stores/app.ts'
 import { useAuthState } from '@/stores/auth.ts'
 import { useMenuState } from '@/stores/menu.ts'
+import { onBeforeMount, onBeforeUpdate, ref } from 'vue'
 
 const appState = useAppState()
 const menuState = useMenuState()
 const authState = useAuthState()
 
-defineProps<{
+const props = defineProps<{
     menuItems: IMenuItem[];
-}>()
+}>();
+
+const items: Ref<IMenuItem[]> = ref([...props.menuItems]);
+
+const setMenuItems = () => {
+    const authState = useAuthState();
+
+    const newMenuItems: IMenuItem[] = [];
+
+    for (const menuItem of props.menuItems) {
+        if (menuItem.public || authState.userAuthenticate) {
+            newMenuItems.push(menuItem);
+        }
+    }
+
+    items.value = newMenuItems;
+}
+
+onBeforeMount(() => {
+    setMenuItems();
+});
+
+onBeforeUpdate(() => {
+    setMenuItems();
+});
+
 </script>
 
 <template>
@@ -21,7 +47,7 @@ defineProps<{
         </div>
         <Divider />
         <div class="BaseMenu__items full-size-h">
-            <div class="BaseMenu__items-item flex flex-center mb-md" v-for="menuItem in menuItems"
+            <div class="BaseMenu__items-item flex flex-center mb-md" v-for="menuItem in items"
                  :key="menuItem.id" :title="menuItem.label">
                 <router-link :to="menuItem.path"
                              class="flex flex-center full-size-w link-hovered transition">

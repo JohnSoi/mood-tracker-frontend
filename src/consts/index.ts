@@ -7,13 +7,15 @@ const MENU_ITEMS: IMenuItem[] = [
         id: 'home',
         label: 'Главная',
         icon: 'home',
-        path: '/'
+        path: '/',
+        component: () => import('@/views/HomeView.vue')
     },
     {
         id: 'feed',
         label: 'Лента',
         icon: 'newspaper',
-        path: '/feed'
+        path: '/feed',
+        component: () => import('@/views/FeedView.vue')
     }
 ];
 

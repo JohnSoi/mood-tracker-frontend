@@ -10,6 +10,8 @@ defineProps<{
 <template>
     <div class="BaseLayout__wrapper full-size flex p-md">
         <BaseMenu :menu-items="menuItems"/>
-        <router-view/>
+        <div class="flex flex-center p-xs full-size">
+            <router-view/>
+        </div>
     </div>
 </template>

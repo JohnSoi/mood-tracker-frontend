@@ -9,8 +9,24 @@
 
 :root {
     --p-divider-border-color: var(--text-color) !important;
+    --p-inputtext-background: var(--secondary-background-color) !important;
+    --p-inputtext-color: var(--text-color) !important;
+    --p-inputtext-border-color: var(--link-color) !important;
+    --p-inputtext-disabled-background: #a5a5a5;
+    --p-primary-color: var(--primary-color) !important;
+    --p-primary-hover-color: var(--primary-hover-color) !important;
+    --p-iftalabel-color: var(--text-color) !important;
+    --p-iftalabel-focus-color: var(--primary-color) !important;
 }
 
 .app-dark {
     --p-divider-border-color: var(--text-color) !important;
+    --p-inputtext-background: var(--secondary-background-color) !important;
+    --p-inputtext-color: var(--text-color) !important;
+    --p-inputtext-border-color: var(--link-color) !important;
+    --p-inputtext-disabled-background: #14171b;
+    --p-primary-color: var(--primary-color) !important;
+    --p-primary-hover-color: var(--primary-hover-color) !important;
+    --p-iftalabel-color: var(--text-color) !important;
+    --p-iftalabel-focus-color: var(--primary-color) !important;
 }

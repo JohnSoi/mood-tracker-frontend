@@ -24,6 +24,7 @@
     --border-radius-menu: var(--space-2xs);
 
     --primary-color: #8D394A;
+    --primary-hover-color: #912138;
     --success-color: #079a40;
     --secondary-color: #367DFF;
 
@@ -67,5 +68,6 @@
     --link-hover-color: #fafafa;
 
     --primary-color: #912138;
+    --primary-hover-color: #8D394A;
     --success-color: #33F37D;
 }
