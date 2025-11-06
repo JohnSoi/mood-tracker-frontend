@@ -29,6 +29,19 @@ a {
     width: 100%;
 }
 
+.half-size {
+    width: 50%;
+    height: 50%;
+}
+
+.half-size-w {
+    width: 50%;
+}
+
+.half-size-h {
+    height: 50%;
+}
+
 .full-size-h {
     height: 100%;
 }
@@ -56,3 +69,20 @@ a {
 .transition {
     transition: var(--transition);
 }
+
+.position-absolute {
+    position: absolute;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.border-radius {
+    border-radius: var(--border-radius);
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+

@@ -18,6 +18,10 @@
     justify-content: space-around;
 }
 
+.flex-jc-end {
+    justify-content: flex-end;
+}
+
 .flex-center {
     align-items: center;
     justify-content: center;

@@ -7,12 +7,16 @@
     background-color: var(--secondary-background-color);
 }
 
+.p-inputtext, .p-password-input {
+    width: 100%;
+}
+
 :root {
     --p-divider-border-color: var(--text-color) !important;
-    --p-inputtext-background: var(--secondary-background-color) !important;
+    --p-inputtext-background: #a5a5a5;
     --p-inputtext-color: var(--text-color) !important;
     --p-inputtext-border-color: var(--link-color) !important;
-    --p-inputtext-disabled-background: #a5a5a5;
+    --p-inputtext-disabled-background: var(--secondary-background-color) !important;
     --p-primary-color: var(--primary-color) !important;
     --p-primary-hover-color: var(--primary-hover-color) !important;
     --p-iftalabel-color: var(--text-color) !important;
@@ -21,10 +25,10 @@
 
 .app-dark {
     --p-divider-border-color: var(--text-color) !important;
-    --p-inputtext-background: var(--secondary-background-color) !important;
+    --p-inputtext-background: #14171b;
     --p-inputtext-color: var(--text-color) !important;
     --p-inputtext-border-color: var(--link-color) !important;
-    --p-inputtext-disabled-background: #14171b;
+    --p-inputtext-disabled-background: var(--secondary-background-color) !important;
     --p-primary-color: var(--primary-color) !important;
     --p-primary-hover-color: var(--primary-hover-color) !important;
     --p-iftalabel-color: var(--text-color) !important;

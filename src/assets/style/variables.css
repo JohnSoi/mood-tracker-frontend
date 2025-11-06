@@ -22,6 +22,7 @@
     --transition: .3s;
 
     --border-radius-menu: var(--space-2xs);
+    --border-radius: var(--space-xs);
 
     --primary-color: #8D394A;
     --primary-hover-color: #912138;
