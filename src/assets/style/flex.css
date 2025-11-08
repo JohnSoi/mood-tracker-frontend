@@ -35,7 +35,6 @@
     flex-direction: column;
 }
 
-
 .gap-3xs {
     gap: var(--space-3xs);
 }

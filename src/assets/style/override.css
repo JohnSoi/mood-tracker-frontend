@@ -21,6 +21,16 @@
     --p-primary-hover-color: var(--primary-hover-color) !important;
     --p-iftalabel-color: var(--text-color) !important;
     --p-iftalabel-focus-color: var(--primary-color) !important;
+    --p-togglebutton-checked-background: var(--secondary-background-color) !important;
+    --p-togglebutton-checked-border-color: var(--secondary-background-color) !important;
+    --p-togglebutton-content-checked-background: var(--primary-background-color) !important;
+    --p-togglebutton-checked-color: var(--text-color) !important;
+    --p-togglebutton-background: var(--secondary-background-color) !important;
+    --p-togglebutton-border-color: var(--secondary-background-color) !important;
+    --p-togglebutton-content-background: var(--primary-background-color) !important;
+    --p-togglebutton-color: var(--link-color) !important;
+    --p-togglebutton-hover-background: var(--btn-hover-color) !important;
+    --p-togglebutton-hover-color: var(--text-color) !important;
 }
 
 .app-dark {
@@ -33,4 +43,14 @@
     --p-primary-hover-color: var(--primary-hover-color) !important;
     --p-iftalabel-color: var(--text-color) !important;
     --p-iftalabel-focus-color: var(--primary-color) !important;
+    --p-togglebutton-checked-background: var(--secondary-background-color) !important;
+    --p-togglebutton-checked-border-color: var(--secondary-background-color) !important;
+    --p-togglebutton-content-checked-background: var(--primary-background-color) !important;
+    --p-togglebutton-checked-color: var(--text-color) !important;
+    --p-togglebutton-background: var(--secondary-background-color) !important;
+    --p-togglebutton-border-color: var(--secondary-background-color) !important;
+    --p-togglebutton-content-background: var(--primary-background-color) !important;
+    --p-togglebutton-color: var(--link-color) !important;
+    --p-togglebutton-hover-background: var(--btn-hover-color) !important;
+    --p-togglebutton-hover-color: var(--text-color) !important;
 }

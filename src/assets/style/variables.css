@@ -5,6 +5,7 @@
     --text-color: #272C34;
     --link-color: #5a5a5a;
     --link-hover-color: #101010;
+    --btn-hover-color: #fafafa;
 
     --space-3xs: 2px;
     --space-2xs: 4px;
@@ -67,6 +68,7 @@
     --text-color: #d0d0d0;
     --link-color: #b8b8b8;
     --link-hover-color: #fafafa;
+    --btn-hover-color: #101010;
 
     --primary-color: #912138;
     --primary-hover-color: #8D394A;
