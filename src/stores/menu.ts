@@ -91,7 +91,11 @@ const useMenuState = defineStore('menuState', () => {
         setValueByKey<boolean>(MENU_STORAGE_KEY, collapsed.value)
     }
 
-    return { collapsed, toggleCollapsed }
+    function setCollapsed(value: boolean): void {
+        collapsed.value = value;
+    }
+
+    return { collapsed, toggleCollapsed, setCollapsed }
 })
 
-export { useMenuState };
+export { useMenuState, MENU_STORAGE_KEY };

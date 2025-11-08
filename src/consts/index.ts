@@ -19,4 +19,6 @@ const MENU_ITEMS: IMenuItem[] = [
     }
 ];
 
-export {APP_NAME, MENU_ITEMS};
+const WIDTH_FOR_COLLAPSE_MENU: number = 800;
+
+export {APP_NAME, MENU_ITEMS, WIDTH_FOR_COLLAPSE_MENU};

@@ -60,13 +60,13 @@ const viewOptions: Ref<{ value: 'login' | 'register', name: string }[]> = ref([
                     <label for="password">Пароль</label>
                 </IftaLabel>
                 <div class="half-size-w flex flex-jc-end mt-sm">
-                    <router-link class="link-hovered transition" to="/forgot-password">Забыли
+                    <router-link class="text-xs link-hovered transition" to="/forgot-password">Забыли
                         пароль?
                     </router-link>
                 </div>
                 <Button class="half-size-w mt-sm" type="button" label="Войти" icon="fa fa-unlock"
                         :loading="loading" @click="load" />
-                <div class="half-size-w flex flex-jc-end mt-sm">
+                <div class="half-size-w flex flex-jc-center mt-sm text-xs">
                     <span>Еще не следите за настроением?
                         <span class="transition link-hovered cursor-pointer" @click="currentViewForm = 'register'">Начать!</span>
                     </span>
@@ -84,5 +84,15 @@ const viewOptions: Ref<{ value: 'login' | 'register', name: string }[]> = ref([
 
 .LoginView__form-login {
     background-color: var(--secondary-background-color);
+}
+
+@media screen and (width < 1300px) {
+    .LoginView__form-image {
+        display: none;
+    }
+
+    .LoginView__form-login {
+        width: 100%;
+    }
 }
 </style>

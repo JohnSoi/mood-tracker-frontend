@@ -15,3 +15,11 @@ defineProps<{
         </div>
     </div>
 </template>
+
+<style>
+@media screen and (width < 800px) {
+    .BaseLayout__wrapper {
+        flex-direction: column-reverse;
+    }
+}
+</style>
