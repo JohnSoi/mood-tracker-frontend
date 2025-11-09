@@ -8,3 +8,13 @@ export interface IMenuItem {
     component: () => Promise<Component>;
     public?: boolean;
 }
+
+export interface IValidatorResult {
+    hasError: boolean;
+    error?: string;
+}
+
+export interface IValidationResultByField {
+    hasError: boolean;
+    errors: string[];
+}

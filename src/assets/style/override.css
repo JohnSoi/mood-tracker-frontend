@@ -31,6 +31,9 @@
     --p-togglebutton-color: var(--link-color) !important;
     --p-togglebutton-hover-background: var(--btn-hover-color) !important;
     --p-togglebutton-hover-color: var(--text-color) !important;
+    --p-datepicker-panel-background: var(--secondary-background-color) !important;
+    --p-datepicker-header-background: var(--primary-background-color) !important;
+
 }
 
 .app-dark {
@@ -53,4 +56,6 @@
     --p-togglebutton-color: var(--link-color) !important;
     --p-togglebutton-hover-background: var(--btn-hover-color) !important;
     --p-togglebutton-hover-color: var(--text-color) !important;
+    --p-datepicker-panel-background: var(--secondary-background-color) !important;
+    --p-datepicker-header-background: var(--primary-background-color) !important;
 }
