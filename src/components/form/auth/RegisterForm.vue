@@ -1,99 +1,35 @@
 <script setup lang="ts">
 
-import { Button, DatePicker, IconField, IftaLabel, InputIcon, InputText } from 'primevue';
+import {
+    Stepper,
+    StepList,
+    Step,
+    StepPanels,
+    StepPanel
+} from 'primevue'
 import { useRegisterForm } from '@/composables/auth/useRegisterForm.ts'
+import RegisterStep1 from '@/components/form/auth/register/RegisterStep1.vue'
 
-const {
-    registerFormData,
-    maxBirthDayValue,
-    minBirthdayValue,
-    registerInProcess,
-    register,
-    nextStep,
-    prevStep,
-    currentStep
-} = useRegisterForm();
+const registerFormController = useRegisterForm()
+const currentStep = registerFormController.currentStep;
+
 </script>
 
 <template>
     <div class="RegisterForm__wrapper full-size flex">
         <div class="RegisterForm__content half-size-w">
-            <div
-                class="RegisterForm__step1 full-size flex flex-center flex-column gap-xs"
-                v-if="currentStep === 1"
-            >
-                <IftaLabel class="half-size-w">
-                    <IconField>
-                        <InputIcon>
-                            <i class="fa fa-user"></i>
-                        </InputIcon>
-                        <InputText
-                            class="full-size-w"
-                            id="name"
-                            name="name"
-                            v-model="registerFormData.name"
-                            placeholder="Ваше имя"
-                        />
-                    </IconField>
-                    <label for="name">Имя</label>
-                </IftaLabel>
-                <IftaLabel class="half-size-w">
-                    <IconField>
-                        <InputIcon>
-                            <i class="fa fa-user"></i>
-                        </InputIcon>
-                        <InputText
-                            class="full-size-w"
-                            id="surname"
-                            name="surname"
-                            v-model="registerFormData.surname"
-                            placeholder="Ваша фамилия"
-                        />
-                    </IconField>
-                    <label for="surname">Фамилия</label>
-                </IftaLabel>
-                <IftaLabel class="half-size-w">
-                    <IconField>
-                        <InputIcon>
-                            <i class="fa fa-user"></i>
-                        </InputIcon>
-                        <InputText
-                            class="full-size-w"
-                            id="patronymic"
-                            name="patronymic"
-                            v-model="registerFormData.patronymic"
-                            placeholder="Ваше отчетсво"
-                        />
-                    </IconField>
-                    <label for="patronymic">Отчество</label>
-                </IftaLabel>
-                <IftaLabel class="half-size-w">
-                    <IconField>
-                        <InputIcon>
-                            <i class="fa fa-calendar"></i>
-                        </InputIcon>
-                        <DatePicker
-                            class="full-size-w"
-                            id="date_birthday"
-                            name="date_birthday"
-                            v-model="registerFormData.date_birthday"
-                            dateFormat="dd MM yy"
-                            placeholder="Ваша дата рождения"
-                            :min-date="minBirthdayValue"
-                            :max-date="maxBirthDayValue"
-                        />
-                    </IconField>
-                    <label for="date_birthday">Дата рождения</label>
-                </IftaLabel>
-                <Button
-                    class="half-size-w mt-sm"
-                    type="button"
-                    label="Далее"
-                    icon="fa fa-arrow-right"
-                    :loading="registerInProcess"
-                    @click="nextStep"
-                />
-            </div>
+            <Stepper :value="currentStep" class="full-size">
+                <StepList>
+                    <Step :value="1">Расскажите о себе</Step>
+                    <Step :value="2">Данные для входа</Step>
+                    <Step :value="3">Настройки приватности</Step>
+                </StepList>
+                <StepPanels class="full-size">
+                    <StepPanel :value="1" class="full-size">
+                        <RegisterStep1 :controller="registerFormController"/>
+                    </StepPanel>
+                </StepPanels>
+            </Stepper>
         </div>
         <div class="RegisterForm__image half-size-w position-relative full-size-h box-shadow">
             <img

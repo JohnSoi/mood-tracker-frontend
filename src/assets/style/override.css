@@ -33,7 +33,13 @@
     --p-togglebutton-hover-color: var(--text-color) !important;
     --p-datepicker-panel-background: var(--secondary-background-color) !important;
     --p-datepicker-header-background: var(--primary-background-color) !important;
-
+    --p-content-background: var(--secondary-background-color) !important;
+    --p-stepper-steppanel-background: var(--secondary-background-color) !important;
+    --p-surface-0: var(--secondary-background-color) !important;
+    --p-datepicker-select-month-color: var(--text-color) !important;
+    --p-datepicker-date-color: var(--text-color) !important;
+    --p-datepicker-select-year-color: var(--text-color) !important;
+    --p-datepicker-week-day-color: var(--link-color) !important;
 }
 
 .app-dark {
@@ -58,4 +64,11 @@
     --p-togglebutton-hover-color: var(--text-color) !important;
     --p-datepicker-panel-background: var(--secondary-background-color) !important;
     --p-datepicker-header-background: var(--primary-background-color) !important;
+    --p-content-background: var(--secondary-background-color) !important;
+    --p-stepper-steppanel-background: var(--secondary-background-color) !important;
+    --p-surface-0: var(--secondary-background-color) !important;
+    --p-datepicker-select-month-color: var(--text-color) !important;
+    --p-datepicker-date-color: var(--text-color) !important;
+    --p-datepicker-select-year-color: var(--text-color) !important;
+    --p-datepicker-week-day-color: var(--link-color) !important;
 }

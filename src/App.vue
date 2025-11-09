@@ -3,6 +3,7 @@ import BaseLayout from '@/components/layout/BaseLayout.vue'
 import { APP_NAME, MENU_ITEMS } from '@/consts'
 import { useAppState } from '@/stores/app.ts'
 const appState = useAppState();
+appState.setBodyTheme();
 </script>
 
 <template>

@@ -1,4 +1,4 @@
-import type { IValidatorResult } from '@/interfases'
+import type { IValidatorResult } from '@/interfases/validators.ts'
 
 function fieldRequired(value: unknown): IValidatorResult {
     let valueIsEmpty = false
@@ -20,7 +20,7 @@ function fieldRequired(value: unknown): IValidatorResult {
 
     if (valueIsEmpty) {
         result.hasError = true
-        result.error = 'Занчение поял обязательно для заполнения'
+        result.error = 'Значение поял обязательно для заполнения'
     }
 
     return result
@@ -28,7 +28,7 @@ function fieldRequired(value: unknown): IValidatorResult {
 
 function minValueLength(value: unknown, minValueLength: number = 4): IValidatorResult {
     const result: IValidatorResult = {
-        hasError = false,
+        hasError: false,
     }
     let lengthLessMin: boolean = false
 
@@ -41,7 +41,7 @@ function minValueLength(value: unknown, minValueLength: number = 4): IValidatorR
     }
 
     if (typeof value === 'object') {
-        lengthLessMin = Object.keys(value).length < minValueLength
+        lengthLessMin = Object.keys(value as Object).length < minValueLength
     }
 
     if (lengthLessMin) {
@@ -54,7 +54,7 @@ function minValueLength(value: unknown, minValueLength: number = 4): IValidatorR
 
 function maxValueLength(value: unknown, maxValueLength: number = 50): IValidatorResult {
     const result: IValidatorResult = {
-        hasError = false,
+        hasError: false,
     }
     let lengthGreatMin: boolean = false
 
@@ -67,7 +67,7 @@ function maxValueLength(value: unknown, maxValueLength: number = 50): IValidator
     }
 
     if (typeof value === 'object') {
-        lengthGreatMin = Object.keys(value).length < maxValueLength
+        lengthGreatMin = Object.keys(value as Object).length < maxValueLength
     }
 
     if (lengthGreatMin) {

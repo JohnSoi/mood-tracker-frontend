@@ -1,4 +1,5 @@
 import type { Ref } from 'vue'
+import type { IValidationResultByField } from '@/interfases/validators.ts'
 
 interface ILoginForm {
     login: string;

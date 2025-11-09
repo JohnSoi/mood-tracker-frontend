@@ -1,9 +1,25 @@
 import { type Ref, ref } from 'vue'
 import type { IRegisterFormComposable, IRegisterFormData } from '@/composables/auth/interfaces.ts'
-import { fieldRequired } from '@/validators/base.ts'
-import type { IValidationResultByField } from '@/interfases'
+import { fieldRequired, maxValueLength, minValueLength } from '@/validators/base.ts'
+import type {
+    IFieldsFormValidators, IFieldFormValidators,
+    IValidationResultByField,
+    IValidatorResult, TValidator
+} from '@/interfases/validators.ts'
+
 
 export function useRegisterForm(): IRegisterFormComposable {
+    const currentDate: Date = new Date()
+    const maxBirthDayValue: Date = new Date(
+        currentDate.getFullYear() - 14,
+        currentDate.getMonth(),
+        currentDate.getDate() + 1
+    )
+    const minBirthdayValue: Date = new Date(
+        currentDate.getFullYear() - 100,
+        currentDate.getMonth(),
+        currentDate.getDate() + 1
+    )
     const registerFormData: Ref<IRegisterFormData> = ref({
         name: '',
         surname: '',
@@ -13,31 +29,8 @@ export function useRegisterForm(): IRegisterFormComposable {
         password: '',
         password_confirmation: '',
         default_post_visible: 'all',
-        default_profile_visible: 'all',
+        default_profile_visible: 'all'
     })
-
-    const validationResult: {[key: string]: IValidationResultByField} = {};
-    const stepValidationStatus: {[key: number]: boolean}
-
-    const stepValidators = {
-        1: [
-            () => {
-                fieldRequired(registerFormData.name);
-                fieldRequired(registerFormData.surname);
-            }
-        ]
-    };
-    const currentDate: Date = new Date()
-    const maxBirthDayValue: Date = new Date(
-        currentDate.getFullYear() - 14,
-        currentDate.getMonth(),
-        currentDate.getDate() + 1,
-    )
-    const minBirthdayValue: Date = new Date(
-        currentDate.getFullYear() - 100,
-        currentDate.getMonth(),
-        currentDate.getDate() + 1,
-    )
 
     const registerInProcess: Ref<boolean> = ref(false)
     const currentStep: Ref<number> = ref(1)
@@ -66,6 +59,6 @@ export function useRegisterForm(): IRegisterFormComposable {
         register,
         nextStep,
         prevStep,
-        currentStep,
+        currentStep
     }
 }

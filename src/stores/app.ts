@@ -55,6 +55,24 @@ const useAppState = defineStore('appState', () => {
      */
     const appTheme: Ref<TAppTheme> = ref(getValueByKey<TAppTheme>(APP_THEME_STORAGE_KEY, "light"));
 
+    const setBodyTheme = (): void => {
+        const bodyElCollection = document.getElementsByTagName('body')
+
+        if (!bodyElCollection) return;
+
+        const bodyEl: HTMLBodyElement = bodyElCollection[0] as HTMLBodyElement;
+        const needDarkThemeClass = appTheme.value === 'dark';
+        const hasDarkThemeClass = bodyEl.classList.contains('app-dark');
+
+        if (needDarkThemeClass && !hasDarkThemeClass) {
+            bodyEl.classList.add('app-dark');
+        }
+
+        if (!needDarkThemeClass && hasDarkThemeClass) {
+            bodyEl.classList.remove('app-dark');
+        }
+    }
+
     /**
      * Переключает тему приложения между светлой и темной
      *
@@ -79,6 +97,7 @@ const useAppState = defineStore('appState', () => {
     function toggleAppTheme(): void {
         appTheme.value = appTheme.value === "light" ? "dark" : "light";
         setValueByKey<TAppTheme>(APP_THEME_STORAGE_KEY, appTheme.value);
+        setBodyTheme();
     }
 
     /**
@@ -113,6 +132,7 @@ const useAppState = defineStore('appState', () => {
     return {
         toggleAppTheme,
         darkThemeEnable,
+        setBodyTheme
     }
 });
 
