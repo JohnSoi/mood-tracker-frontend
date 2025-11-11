@@ -1,5 +1,5 @@
 import type { Ref } from 'vue'
-import type { IValidationResultByField } from '@/interfases/validators.ts'
+import type { IFormData } from '@/interfases'
 
 interface ILoginForm {
     login: string;
@@ -41,6 +41,7 @@ interface IRegisterFormComposable {
     nextStep: () => Promise<void>;
     prevStep: () => void;
     currentStep: Ref<number>;
+    stepFormData: { [key: number]: IFormData };
 }
 
-export type {ILoginForm, ILoginFormComposable, IRegisterFormData, IRegisterFormComposable};
+export type { ILoginForm, ILoginFormComposable, IRegisterFormData, IRegisterFormComposable }

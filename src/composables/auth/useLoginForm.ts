@@ -1,5 +1,5 @@
 import { type Ref, ref } from 'vue'
-import type { ILoginForm, ILoginFormComposable } from '@/composables/auth/interfaces.ts'
+import type { ILoginForm, ILoginFormComposable } from '@/interfases/auth.ts'
 
 export function useLoginForm(): ILoginFormComposable {
     const loginFormData: Ref<ILoginForm> = ref({

@@ -8,10 +8,11 @@ import {
     StepPanel
 } from 'primevue'
 import { useRegisterForm } from '@/composables/auth/useRegisterForm.ts'
-import RegisterStep1 from '@/components/form/auth/register/RegisterStep1.vue'
+import BaseForm from '@/components/form/BaseForm.vue'
+import type { IFormBtnConfig, IFormData, IFormItem } from '@/interfases'
 
 const registerFormController = useRegisterForm()
-const currentStep = registerFormController.currentStep;
+const currentStep = registerFormController.currentStep
 
 </script>
 
@@ -20,13 +21,19 @@ const currentStep = registerFormController.currentStep;
         <div class="RegisterForm__content half-size-w">
             <Stepper :value="currentStep" class="full-size">
                 <StepList>
-                    <Step :value="1">Расскажите о себе</Step>
-                    <Step :value="2">Данные для входа</Step>
-                    <Step :value="3">Настройки приватности</Step>
+                    <Step :value="index" v-for="index in (Object.keys(registerFormController.stepFormData).map(Number) as number[])" :key="index">
+                        {{ (registerFormController.stepFormData[index] as IFormData).title }}
+                    </Step>
                 </StepList>
                 <StepPanels class="full-size">
-                    <StepPanel :value="1" class="full-size">
-                        <RegisterStep1 :controller="registerFormController"/>
+                    <StepPanel :value="index" class="full-size"
+                               v-for="index in (Object.keys(registerFormController.stepFormData).map(Number) as number[])"
+                               :key="index">
+                        <BaseForm
+                            :items="(registerFormController.stepFormData[index] as IFormData).items as IFormItem[]"
+                            :buttons="(registerFormController.stepFormData[index] as IFormData).buttons as IFormBtnConfig[]"
+                            :values="registerFormController.registerFormData"
+                        />
                     </StepPanel>
                 </StepPanels>
             </Stepper>
