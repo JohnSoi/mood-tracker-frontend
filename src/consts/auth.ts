@@ -102,7 +102,16 @@ const REGISTER_STEP_2_FORM_DATA = (prevCallback: TFormBtnCallback, nextCallback:
                 minLength: 4,
                 maxLength: 50,
                 icon: 'fa fa-key',
-                type: 'password'
+                type: 'password',
+                validation: (value: string | Date, values: {[key: string]: string | Date}): string[] | null => {
+                    const errors: string[] = [];
+
+                    if (value != values.password) {
+                        errors.push('Введенные пароли не совпадают')
+                    }
+
+                    return errors.length ? errors : null;
+                },
             }
         ],
         buttons: [
@@ -124,11 +133,57 @@ const REGISTER_STEP_2_FORM_DATA = (prevCallback: TFormBtnCallback, nextCallback:
     }
 }
 
-const REGISTER_STEP_3_FORM_DATA = (): IStepFormData => {
+const REGISTER_STEP_3_FORM_DATA = (nextCallback: TFormBtnCallback): IStepFormData => {
     return {
         title: 'Настройки приватности',
-        items: [],
-        buttons: []
+        items: [
+            {
+                id: 'default_post_visible',
+                label: 'Кто видит мои посты: ',
+                type: 'select',
+                defaultValue: 'all',
+                selectValues: [
+                    {
+                        name: 'Все',
+                        value: 'all'
+                    },
+                    {
+                        name: 'Только друзья',
+                        value: 'friends'
+                    },
+                    {
+                        name: 'Только я',
+                        value: 'onlyMe'
+                    }
+                ]
+            },
+            {
+                id: 'default_profile_visible',
+                label: 'Кто видит мой профиль: ',
+                type: 'select',
+                defaultValue: 'all',
+                selectValues: [
+                    {
+                        name: 'Все',
+                        value: 'all'
+                    },
+                    {
+                        name: 'Только друзья',
+                        value: 'friends'
+                    },
+                    {
+                        name: 'Только я',
+                        value: 'onlyMe'
+                    }
+                ]
+            }
+        ],
+        buttons: [{
+            id: 'next',
+            label: 'Войти',
+            icon: 'fa fa-unlock',
+            callback: nextCallback
+        }]
     }
 }
 

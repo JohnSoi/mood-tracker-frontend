@@ -37,11 +37,13 @@ interface IRegisterFormComposable {
     minBirthdayValue: Date;
     maxBirthDayValue: Date;
     registerInProcess: Ref<boolean>;
-    register: () => Promise<boolean>;
+    register: (formValue: IRegisterFormData) => Promise<void>;
     nextStep: () => Promise<void>;
     prevStep: () => void;
     currentStep: Ref<number>;
-    stepFormData: { [key: number]: IFormData };
+    stepFormData: { [key in TStepKey]: IFormData };
 }
 
-export type { ILoginForm, ILoginFormComposable, IRegisterFormData, IRegisterFormComposable }
+type TStepKey = 1 | 2 | 3;
+
+export type { ILoginForm, ILoginFormComposable, IRegisterFormData, IRegisterFormComposable, TStepKey }

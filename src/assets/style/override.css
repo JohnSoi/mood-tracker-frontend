@@ -72,3 +72,16 @@
     --p-datepicker-select-year-color: var(--text-color) !important;
     --p-datepicker-week-day-color: var(--link-color) !important;
 }
+
+.BaseForm__wrapper {
+    --p-togglebutton-checked-background: var(--form-secondary-color) !important;
+    --p-togglebutton-checked-border-color: var(--form-secondary-color) !important;
+    --p-togglebutton-content-checked-background: var(--form-primary-color) !important;
+    --p-togglebutton-checked-color: var(--text-color) !important;
+    --p-togglebutton-background: var(--form-secondary-color) !important;
+    --p-togglebutton-border-color: var(--form-secondary-color) !important;
+    --p-togglebutton-content-background: var(--form-primary-color) !important;
+    --p-togglebutton-color: var(--link-color) !important;
+    --p-togglebutton-hover-background: var(--btn-hover-color) !important;
+    --p-togglebutton-hover-color: var(--text-color) !important;
+}

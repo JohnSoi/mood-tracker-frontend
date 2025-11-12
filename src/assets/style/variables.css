@@ -1,6 +1,8 @@
 :root {
     --primary-background-color: #ffffff;
     --secondary-background-color: #d0d0d0;
+    --form-secondary-color: #878686;
+    --form-primary-color: #ffffff;
 
     --text-color: #272C34;
     --link-color: #5a5a5a;
@@ -64,6 +66,8 @@
 .app-dark {
     --primary-background-color: #383C46;
     --secondary-background-color: #272C34;
+    --form-secondary-color: #4a4a4a;
+    --form-primary-color: #16181b;
 
     --text-color: #d0d0d0;
     --link-color: #b8b8b8;

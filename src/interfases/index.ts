@@ -12,15 +12,17 @@ export interface IMenuItem {
 export interface IFormItem {
     id: string;
     label: string;
-    icon: string;
-    placeholder: string;
+    icon?: string;
+    placeholder?: string;
     required?: boolean;
-    type: 'text' | 'password' | 'email' | 'date';
+    defaultValue?: string;
+    type: 'text' | 'password' | 'email' | 'date' | 'select';
     minLength?: number;
     maxLength?: number;
     minDate?: Date;
     maxDate?: Date;
-    validation?: (value: string | number) => string[] | null;
+    validation?: (value: string | Date, values: {[key: string]: string | Date}) => string[] | null;
+    selectValues?: {name: string, value: string}[];
 }
 
 export type TFormBtnCallback = (values: {[key: string]: string | Date}) => Promise<void>
@@ -37,6 +39,10 @@ export interface IFormBtnConfig {
 export interface IFormData {
     items: IFormItem[];
     buttons: IFormBtnConfig[];
+}
+
+export interface IBaseForm extends IFormData {
+    isLoading: boolean;
 }
 
 export interface IStepFormData extends IFormData {

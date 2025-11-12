@@ -101,3 +101,7 @@
 .text-success {
     color: var(--success-color);
 }
+
+.text-default {
+    color: var(--text-color);
+}

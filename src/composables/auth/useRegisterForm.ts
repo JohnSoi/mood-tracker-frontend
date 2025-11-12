@@ -6,7 +6,7 @@ import {
     MIN_REGISTER_YEAR,
     REGISTER_STEP_1_FORM_DATA, REGISTER_STEP_2_FORM_DATA, REGISTER_STEP_3_FORM_DATA
 } from '@/consts/auth.ts'
-import type { IRegisterFormComposable, IRegisterFormData } from '@/interfases/auth.ts'
+import type { IRegisterFormComposable, IRegisterFormData, TStepKey } from '@/interfases/auth.ts'
 import { getSubtractYearFromCurrentDate } from '@/utils/date.ts'
 
 
@@ -19,7 +19,14 @@ export function useRegisterForm(): IRegisterFormComposable {
         date_birthday: minBirthdayValue
     })
 
-    const stepFormData: {[key: number]: IStepFormData} = {
+    const register = async (formValue: IRegisterFormData): Promise<void> => {
+        registerInProcess.value = true
+        setTimeout(() => {
+            registerInProcess.value = false
+        }, 1000)
+    }
+
+    const stepFormData: {[key in TStepKey]: IStepFormData} = {
         1: REGISTER_STEP_1_FORM_DATA(minBirthdayValue, maxBirthDayValue, async (values) => {
             registerFormData.value = {
                 ...registerFormData.value,
@@ -27,7 +34,7 @@ export function useRegisterForm(): IRegisterFormComposable {
             }
             await nextStep()
         }),
-        2: REGISTER_STEP_2_FORM_DATA(async (values) => {
+        2: REGISTER_STEP_2_FORM_DATA(async (_) => {
             prevStep()
         }, async (values) => {
             registerFormData.value = {
@@ -36,19 +43,17 @@ export function useRegisterForm(): IRegisterFormComposable {
             }
             await nextStep()
         }),
-        3: REGISTER_STEP_3_FORM_DATA()
+        3: REGISTER_STEP_3_FORM_DATA(async (values) => {
+            registerFormData.value = {
+                ...registerFormData.value,
+                ...values
+            }
+            await register(registerFormData.value)
+        })
     };
 
     const registerInProcess: Ref<boolean> = ref(false)
-    const currentStep: Ref<number> = ref(1)
-
-    const register = async (): Promise<boolean> => {
-        registerInProcess.value = true
-        setTimeout(() => {
-            registerInProcess.value = false
-        }, 1000)
-        return true
-    }
+    const currentStep: Ref<TStepKey> = ref(1)
 
     const nextStep = async (): Promise<void> => {
         currentStep.value++
