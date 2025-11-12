@@ -55,6 +55,7 @@ const REGISTER_STEP_1_FORM_DATA = (minBirthdayValue: Date, maxBirthDayValue: Dat
                 required: true,
                 icon: 'fa fa-calendar',
                 type: 'date',
+                defaultValue: maxBirthDayValue,
                 minDate: minBirthdayValue,
                 maxDate: maxBirthDayValue
             }
@@ -187,11 +188,16 @@ const REGISTER_STEP_3_FORM_DATA = (nextCallback: TFormBtnCallback): IStepFormDat
     }
 }
 
+const MAX_REGISTER_STEP: number = 3;
+const MIN_REGISTER_STEP: number = 1;
+
 export {
     MIN_REGISTER_YEAR,
     MAX_REGISTER_YEAR,
     BASE_REGISTER_DATA,
     REGISTER_STEP_1_FORM_DATA,
     REGISTER_STEP_2_FORM_DATA,
-    REGISTER_STEP_3_FORM_DATA
+    REGISTER_STEP_3_FORM_DATA,
+    MAX_REGISTER_STEP,
+    MIN_REGISTER_STEP
 }

@@ -15,7 +15,7 @@ export interface IFormItem {
     icon?: string;
     placeholder?: string;
     required?: boolean;
-    defaultValue?: string;
+    defaultValue?: string | Date;
     type: 'text' | 'password' | 'email' | 'date' | 'select';
     minLength?: number;
     maxLength?: number;

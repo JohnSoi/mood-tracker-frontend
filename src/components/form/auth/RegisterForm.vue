@@ -5,7 +5,8 @@ import {
     StepList,
     Step,
     StepPanels,
-    StepPanel
+    StepPanel,
+    ProgressBar
 } from 'primevue'
 import { useRegisterForm } from '@/composables/auth/useRegisterForm.ts'
 import BaseForm from '@/components/form/BaseForm.vue'
@@ -30,7 +31,7 @@ const validateStepEnd = (step: TStepKey, stepDisable: boolean) => {
 <template>
     <div class="RegisterForm__wrapper full-size flex">
         <div class="RegisterForm__content half-size-w">
-            <Stepper :value="currentStep" class="full-size">
+            <Stepper :value="currentStep" class="full-size flex flex-column">
                 <StepList>
                     <Step :value="index"
                           v-for="index in (Object.keys(registerFormController.stepFormData).map(Number) as TStepKey[])"
@@ -41,19 +42,20 @@ const validateStepEnd = (step: TStepKey, stepDisable: boolean) => {
                         }}
                     </Step>
                 </StepList>
-                <StepPanels class="full-size">
+                <StepPanels class="full-size flex flex-column">
                     <StepPanel :value="index" class="full-size"
                                v-for="index in (Object.keys(registerFormController.stepFormData).map(Number) as number[])"
                                :key="index">
                         <BaseForm
-                            :items="(registerFormController.stepFormData[index] as IStepFormData).items as IFormItem[]"
-                            :buttons="(registerFormController.stepFormData[index] as IStepFormData).buttons as IFormBtnConfig[]"
+                            :items="(registerFormController.stepFormData[index as TStepKey] as IStepFormData).items as IFormItem[]"
+                            :buttons="(registerFormController.stepFormData[index as TStepKey] as IStepFormData).buttons as IFormBtnConfig[]"
                             :values="registerFormController.registerFormData"
                             :isLoading="registerFormController.registerInProcess.value"
-                            @step-error-check="validateStepEnd(index, true)"
-                            @step-end-check="validateStepEnd(index, false)"
+                            @step-error-check="validateStepEnd(index as TStepKey, true)"
+                            @step-end-check="validateStepEnd(index as TStepKey, false)"
                         />
                     </StepPanel>
+                    <ProgressBar :value="registerFormController.progressPercentage.value"></ProgressBar>
                 </StepPanels>
             </Stepper>
         </div>

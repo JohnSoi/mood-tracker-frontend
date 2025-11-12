@@ -1,4 +1,4 @@
-import type { Ref } from 'vue'
+import type { ComputedRef, Ref } from 'vue'
 import type { IFormData } from '@/interfases'
 
 interface ILoginForm {
@@ -42,6 +42,7 @@ interface IRegisterFormComposable {
     prevStep: () => void;
     currentStep: Ref<number>;
     stepFormData: { [key in TStepKey]: IFormData };
+    progressPercentage: ComputedRef<string>;
 }
 
 type TStepKey = 1 | 2 | 3;
