@@ -25,7 +25,7 @@ export interface IFormItem {
     selectValues?: {name: string, value: string}[];
 }
 
-export type TFormBtnCallback = (values: {[key: string]: string | Date}) => Promise<void>
+export type TFormBtnCallback = (values: {[key: string]: string | Date}) => Promise<void> | void
 
 export interface IFormBtnConfig {
     id: string;

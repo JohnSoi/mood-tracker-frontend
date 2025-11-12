@@ -38,7 +38,7 @@ interface IRegisterFormComposable {
     maxBirthDayValue: Date;
     registerInProcess: Ref<boolean>;
     register: (formValue: IRegisterFormData) => Promise<void>;
-    nextStep: () => Promise<void>;
+    nextStep: () => void;
     prevStep: () => void;
     currentStep: Ref<number>;
     stepFormData: { [key in TStepKey]: IFormData };

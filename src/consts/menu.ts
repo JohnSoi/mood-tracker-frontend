@@ -1,0 +1,5 @@
+const DEBOUNCE_RESIZE_HANDLER_MS: number = 300;
+
+export {
+    DEBOUNCE_RESIZE_HANDLER_MS
+}
