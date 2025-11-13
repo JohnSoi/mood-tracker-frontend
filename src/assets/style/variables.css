@@ -4,7 +4,7 @@
     --form-secondary-color: #878686;
     --form-primary-color: #ffffff;
 
-    --text-color: #272C34;
+    --text-color: #272c34;
     --link-color: #5a5a5a;
     --link-hover-color: #101010;
     --btn-hover-color: #fafafa;
@@ -22,15 +22,15 @@
     --shadow-color: #333333;
     --box-shadow: 1px 1px 2px 0 var(--shadow-color);
 
-    --transition: .3s;
+    --transition: 0.3s;
 
     --border-radius-menu: var(--space-2xs);
     --border-radius: var(--space-xs);
 
-    --primary-color: #8D394A;
+    --primary-color: #8d394a;
     --primary-hover-color: #912138;
     --success-color: #079a40;
-    --secondary-color: #367DFF;
+    --secondary-color: #367dff;
 
     --text-3xs: 10px;
     --text-2xs: 11px;
@@ -64,8 +64,8 @@
 }
 
 .app-dark {
-    --primary-background-color: #383C46;
-    --secondary-background-color: #272C34;
+    --primary-background-color: #383c46;
+    --secondary-background-color: #272c34;
     --form-secondary-color: #4a4a4a;
     --form-primary-color: #16181b;
 
@@ -75,6 +75,6 @@
     --btn-hover-color: #101010;
 
     --primary-color: #912138;
-    --primary-hover-color: #8D394A;
-    --success-color: #33F37D;
+    --primary-hover-color: #8d394a;
+    --success-color: #33f37d;
 }

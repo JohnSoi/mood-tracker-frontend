@@ -1,5 +1,5 @@
-import { type Ref, ref } from 'vue'
-import type { ILoginForm, ILoginFormComposable } from '@/interfases/auth.ts'
+import { type Ref, ref } from "vue";
+import type { ILoginForm, ILoginFormComposable } from "@/interfases/auth.ts";
 
 /**
  * Vue 3 Composition API функция для управления формой авторизации
@@ -43,8 +43,8 @@ export function useLoginForm(): ILoginFormComposable {
      * ```
      */
     const loginFormData: Ref<ILoginForm> = ref({
-        login: '',
-        password: ''
+        login: "",
+        password: "",
     });
 
     /**
@@ -97,11 +97,11 @@ export function useLoginForm(): ILoginFormComposable {
         }, 1000);
 
         return true;
-    }
+    };
 
     return {
         loginFormData,
         authInProcess,
-        login
-    }
+        login,
+    };
 }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { IBaseForm } from '@/interfases'
+import type { IBaseForm } from "@/interfases/form";
 import {
     IftaLabel,
     IconField,
@@ -9,19 +9,19 @@ import {
     Message,
     DatePicker,
     Password,
-    SelectButton
-} from 'primevue'
-import { useBaseForm } from '@/composables/useBaseForm.ts'
+    SelectButton,
+} from "primevue";
+import { useBaseForm } from "@/composables/useBaseForm.ts";
 
-const props = defineProps<IBaseForm>()
-const emits = defineEmits(['stepErrorCheck', 'stepEndCheck']);
+const props = defineProps<IBaseForm>();
+const emits = defineEmits(["stepErrorCheck", "stepEndCheck"]);
 
-const { values, fieldErrors, validateAndNext, btnIsLoading } = useBaseForm(props, emits)
+const { values, fieldErrors, validateAndNext, btnIsLoading } = useBaseForm(props, emits);
 </script>
 
 <template>
     <div class="BaseForm__wrapper full-size flex flex-center flex-column">
-        <IftaLabel  class="half-size-w mb-md" v-for="item in items" :key="item.id">
+        <IftaLabel class="half-size-w mb-md" v-for="item in items" :key="item.id">
             <IconField v-if="item.type !== 'select'">
                 <InputIcon>
                     <i :class="item.icon"></i>
@@ -57,28 +57,23 @@ const { values, fieldErrors, validateAndNext, btnIsLoading } = useBaseForm(props
                     :invalid="!!fieldErrors[item.id]"
                     v-if="item.type === 'date'"
                 />
-                <Message
-                    v-for="error in fieldErrors[item.id]"
-                    :key="error"
-                    size="small"
-                    severity="error"
-                >
+                <Message v-for="error in fieldErrors[item.id]" :key="error" size="small" severity="error">
                     {{ error }}
                 </Message>
             </IconField>
             <label :for="item.id" v-if="item.type !== 'select'">{{ item.label }}</label>
             <div v-if="item.type === 'select'">
                 <span class="text-default">{{ item.label }}</span>
-                    <SelectButton
-                        class="mt-sm"
-                        v-model="values[item.id]"
-                        :options="item.selectValues"
-                        optionLabel="name"
-                        optionValue="value"
-                        dataKey="value"
-                    />
+                <SelectButton
+                    class="mt-sm"
+                    v-model="values[item.id]"
+                    :options="item.selectValues"
+                    optionLabel="name"
+                    optionValue="value"
+                    dataKey="value"
+                />
             </div>
-        </IftaLabel >
+        </IftaLabel>
         <div class="flex half-size-w gap-md flex-center">
             <Button
                 v-for="button in buttons"

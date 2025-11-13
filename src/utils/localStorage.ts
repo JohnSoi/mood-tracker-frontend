@@ -23,4 +23,4 @@ function getValueByKey<TValue>(key: string, defaultValue: TValue): TValue {
     }
 }
 
-export {getValueByKey, setValueByKey};
+export { getValueByKey, setValueByKey };

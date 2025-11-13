@@ -1,6 +1,6 @@
-import { defineStore } from 'pinia';
-import { ref, type Ref } from 'vue';
-import { getValueByKey, setValueByKey } from '@/utils/localStorage.ts'
+import { defineStore } from "pinia";
+import { ref, type Ref } from "vue";
+import { getValueByKey, setValueByKey } from "@/utils/localStorage.ts";
 
 /**
  * Ключ для хранения темы в localStorage
@@ -8,7 +8,7 @@ import { getValueByKey, setValueByKey } from '@/utils/localStorage.ts'
  * @default 'appTheme'
  * @private
  */
-const APP_THEME_STORAGE_KEY: string = 'appTheme';
+const APP_THEME_STORAGE_KEY: string = "appTheme";
 
 /**
  * Доступные темы приложения
@@ -47,7 +47,7 @@ type TAppTheme = "light" | "dark";
  *   </div>
  * </template>
  */
-const useAppState = defineStore('appState', () => {
+const useAppState = defineStore("appState", () => {
     /**
      * Текущая тема приложения
      * @type {Ref<TAppTheme>}
@@ -56,22 +56,22 @@ const useAppState = defineStore('appState', () => {
     const appTheme: Ref<TAppTheme> = ref(getValueByKey<TAppTheme>(APP_THEME_STORAGE_KEY, "light"));
 
     const setBodyTheme = (): void => {
-        const bodyElCollection = document.getElementsByTagName('body')
+        const bodyElCollection = document.getElementsByTagName("body");
 
         if (!bodyElCollection) return;
 
         const bodyEl: HTMLBodyElement = bodyElCollection[0] as HTMLBodyElement;
-        const needDarkThemeClass = appTheme.value === 'dark';
-        const hasDarkThemeClass = bodyEl.classList.contains('app-dark');
+        const needDarkThemeClass = appTheme.value === "dark";
+        const hasDarkThemeClass = bodyEl.classList.contains("app-dark");
 
         if (needDarkThemeClass && !hasDarkThemeClass) {
-            bodyEl.classList.add('app-dark');
+            bodyEl.classList.add("app-dark");
         }
 
         if (!needDarkThemeClass && hasDarkThemeClass) {
-            bodyEl.classList.remove('app-dark');
+            bodyEl.classList.remove("app-dark");
         }
-    }
+    };
 
     /**
      * Переключает тему приложения между светлой и темной
@@ -132,8 +132,8 @@ const useAppState = defineStore('appState', () => {
     return {
         toggleAppTheme,
         darkThemeEnable,
-        setBodyTheme
-    }
+        setBodyTheme,
+    };
 });
 
 export { useAppState };

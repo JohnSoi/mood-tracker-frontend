@@ -1,31 +1,22 @@
 <script setup lang="ts">
+import { Stepper, StepList, Step, StepPanels, StepPanel, ProgressBar } from "primevue";
+import { useRegisterForm } from "@/composables/auth/useRegisterForm.ts";
+import BaseForm from "@/components/form/BaseForm.vue";
+import type { IFormBtnConfig, IFormItem, IStepFormData, TValidateStepEnd } from "@/interfases/form";
+import { type Ref, ref } from "vue";
+import type { IRegisterFormComposable, TRegisterStepKey } from "@/interfases/auth.ts";
 
-import {
-    Stepper,
-    StepList,
-    Step,
-    StepPanels,
-    StepPanel,
-    ProgressBar
-} from 'primevue'
-import { useRegisterForm } from '@/composables/auth/useRegisterForm.ts'
-import BaseForm from '@/components/form/BaseForm.vue'
-import type { IFormBtnConfig, IFormItem, IStepFormData } from '@/interfases'
-import { type Ref, ref } from 'vue'
-import type { TStepKey } from '@/interfases/auth.ts'
-
-const registerFormController = useRegisterForm()
-const currentStep = registerFormController.currentStep
-const stepDisables: Ref<{ [key in TStepKey]: boolean }> = ref({
+const registerFormController: IRegisterFormComposable = useRegisterForm();
+const currentStep: Ref<number> = registerFormController.currentStep;
+const stepDisables: Ref<{ [key in TRegisterStepKey]: boolean }> = ref({
     1: false,
     2: true,
     3: true,
-})
+});
 
-const validateStepEnd = (step: TStepKey, stepDisable: boolean) => {
-    stepDisables.value[step] = stepDisable
-}
-
+const validateStepEnd: TValidateStepEnd = (step: TRegisterStepKey, stepDisable: boolean): void => {
+    stepDisables.value[step] = stepDisable;
+};
 </script>
 
 <template>
@@ -33,26 +24,35 @@ const validateStepEnd = (step: TStepKey, stepDisable: boolean) => {
         <div class="RegisterForm__content half-size-w">
             <Stepper :value="currentStep" class="full-size flex flex-column">
                 <StepList>
-                    <Step :value="index"
-                          v-for="index in (Object.keys(registerFormController.stepFormData).map(Number) as TStepKey[])"
-                          :key="index" :disabled="stepDisables[index]"
+                    <Step
+                        :value="index"
+                        v-for="index in Object.keys(registerFormController.stepFormData).map(Number) as TRegisterStepKey[]"
+                        :key="index"
+                        :disabled="stepDisables[index]"
                     >
-                        {{
-                            (registerFormController.stepFormData[index] as IStepFormData).title as string
-                        }}
+                        {{ (registerFormController.stepFormData[index] as IStepFormData).title as string }}
                     </Step>
                 </StepList>
                 <StepPanels class="full-size flex flex-column">
-                    <StepPanel :value="index" class="full-size"
-                               v-for="index in (Object.keys(registerFormController.stepFormData).map(Number) as number[])"
-                               :key="index">
+                    <StepPanel
+                        :value="index"
+                        class="full-size"
+                        v-for="index in Object.keys(registerFormController.stepFormData).map(Number) as number[]"
+                        :key="index"
+                    >
                         <BaseForm
-                            :items="(registerFormController.stepFormData[index as TStepKey] as IStepFormData).items as IFormItem[]"
-                            :buttons="(registerFormController.stepFormData[index as TStepKey] as IStepFormData).buttons as IFormBtnConfig[]"
+                            :items="
+                                (registerFormController.stepFormData[index as TRegisterStepKey] as IStepFormData)
+                                    .items as IFormItem[]
+                            "
+                            :buttons="
+                                (registerFormController.stepFormData[index as TRegisterStepKey] as IStepFormData)
+                                    .buttons as IFormBtnConfig[]
+                            "
                             :values="registerFormController.registerFormData"
                             :isLoading="registerFormController.registerInProcess.value"
-                            @step-error-check="validateStepEnd(index as TStepKey, true)"
-                            @step-end-check="validateStepEnd(index as TStepKey, false)"
+                            @step-error-check="validateStepEnd(index as TRegisterStepKey, true)"
+                            @step-end-check="validateStepEnd(index as TRegisterStepKey, false)"
                         />
                     </StepPanel>
                     <ProgressBar :value="registerFormController.progressPercentage.value"></ProgressBar>

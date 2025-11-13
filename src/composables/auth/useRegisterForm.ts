@@ -1,13 +1,17 @@
-import { computed, type ComputedRef, type Ref, ref } from 'vue'
-import type { IStepFormData } from '@/interfases'
+import { computed, type ComputedRef, type Ref, ref } from "vue";
+import type { IStepFormData } from "@/interfases/form";
 import {
-    BASE_REGISTER_DATA, MAX_REGISTER_STEP,
-    MAX_REGISTER_YEAR, MIN_REGISTER_STEP,
+    BASE_REGISTER_DATA,
+    MAX_REGISTER_STEP,
+    MAX_REGISTER_YEAR,
+    MIN_REGISTER_STEP,
     MIN_REGISTER_YEAR,
-    REGISTER_STEP_1_FORM_DATA, REGISTER_STEP_2_FORM_DATA, REGISTER_STEP_3_FORM_DATA
-} from '@/consts/auth.ts'
-import type { IRegisterFormComposable, IRegisterFormData, TStepKey } from '@/interfases/auth.ts'
-import { getSubtractYearFromCurrentDate } from '@/utils/date.ts'
+    REGISTER_STEP_1_FORM_DATA,
+    REGISTER_STEP_2_FORM_DATA,
+    REGISTER_STEP_3_FORM_DATA,
+} from "@/consts/auth.ts";
+import type { IRegisterFormComposable, IRegisterFormData, TRegisterStepKey } from "@/interfases/auth.ts";
+import { getSubtractYearFromCurrentDate } from "@/utils/date.ts";
 
 /**
  * Vue 3 Composition API функция для управления многошаговой формой регистрации
@@ -38,7 +42,7 @@ export function useRegisterForm(): IRegisterFormComposable {
      * @remarks
      * Рассчитывается как текущая дата минус MIN_REGISTER_YEAR лет
      */
-    const maxBirthDayValue: Date = getSubtractYearFromCurrentDate(MIN_REGISTER_YEAR)
+    const maxBirthDayValue: Date = getSubtractYearFromCurrentDate(MIN_REGISTER_YEAR);
 
     /**
      * Минимальная допустимая дата рождения (максимальный возраст пользователя)
@@ -46,7 +50,7 @@ export function useRegisterForm(): IRegisterFormComposable {
      * @remarks
      * Рассчитывается как текущая дата минус MAX_REGISTER_YEAR лет
      */
-    const minBirthdayValue: Date = getSubtractYearFromCurrentDate(MAX_REGISTER_YEAR)
+    const minBirthdayValue: Date = getSubtractYearFromCurrentDate(MAX_REGISTER_YEAR);
 
     /**
      * Реактивные данные формы регистрации
@@ -56,8 +60,8 @@ export function useRegisterForm(): IRegisterFormComposable {
      */
     const registerFormData: Ref<IRegisterFormData> = ref({
         ...BASE_REGISTER_DATA,
-        date_birthday: minBirthdayValue
-    })
+        date_birthday: minBirthdayValue,
+    });
 
     /**
      * Выполняет процесс регистрации пользователя
@@ -73,11 +77,11 @@ export function useRegisterForm(): IRegisterFormComposable {
      * @todo Заменить setTimeout на реальный API вызов
      */
     const register = async (formValue: IRegisterFormData): Promise<void> => {
-        registerInProcess.value = true
+        registerInProcess.value = true;
         setTimeout(() => {
-            registerInProcess.value = false
-        }, 1000)
-    }
+            registerInProcess.value = false;
+        }, 1000);
+    };
 
     /**
      * Обрабатывает отправку данных первого шага формы
@@ -87,10 +91,10 @@ export function useRegisterForm(): IRegisterFormComposable {
     const handleStep1Submit = (values: Partial<IRegisterFormData>): void => {
         registerFormData.value = {
             ...registerFormData.value,
-            ...values
-        }
-        nextStep()
-    }
+            ...values,
+        };
+        nextStep();
+    };
 
     /**
      * Обрабатывает отправку данных второго шага формы
@@ -100,19 +104,19 @@ export function useRegisterForm(): IRegisterFormComposable {
     const handleStep2Submit = (values: Partial<IRegisterFormData>): void => {
         registerFormData.value = {
             ...registerFormData.value,
-            ...values
-        }
-        nextStep()
-    }
+            ...values,
+        };
+        nextStep();
+    };
 
     /**
      * Обрабатывает возврат на предыдущий шаг со второго шага формы
      *
      * @returns Promise, который разрешается после возврата на предыдущий шаг
      */
-    const handleStep2Prev = async (): Promise<void> => {
-        prevStep()
-    }
+    const handleStep2Prev = (): void => {
+        prevStep();
+    };
 
     /**
      * Обрабатывает отправку данных третьего шага формы и инициирует процесс регистрации
@@ -123,10 +127,10 @@ export function useRegisterForm(): IRegisterFormComposable {
     const handleStep3Submit = async (values: Partial<IRegisterFormData>): Promise<void> => {
         registerFormData.value = {
             ...registerFormData.value,
-            ...values
-        }
-        await register(registerFormData.value)
-    }
+            ...values,
+        };
+        await register(registerFormData.value);
+    };
 
     /**
      * Конфигурация данных для каждого шага формы
@@ -135,7 +139,7 @@ export function useRegisterForm(): IRegisterFormComposable {
      * Объект, содержащий конфигурацию для всех трех шагов формы.
      * Каждый шаг использует соответствующую фабричную функцию для создания своей конфигурации.
      */
-    const stepFormData: { [key in TStepKey]: IStepFormData } = {
+    const stepFormData: { [key in TRegisterStepKey]: IStepFormData } = {
         /** Конфигурация первого шага формы с валидацией даты рождения */
         1: REGISTER_STEP_1_FORM_DATA(minBirthdayValue, maxBirthDayValue, handleStep1Submit),
 
@@ -143,22 +147,22 @@ export function useRegisterForm(): IRegisterFormComposable {
         2: REGISTER_STEP_2_FORM_DATA(handleStep2Prev, handleStep2Submit),
 
         /** Конфигурация третьего шага формы с обработчиком финальной отправки */
-        3: REGISTER_STEP_3_FORM_DATA(handleStep3Submit)
-    }
+        3: REGISTER_STEP_3_FORM_DATA(handleStep3Submit),
+    };
 
     /**
      * Реактивный флаг, указывающий на выполнение процесса регистрации
      *
      * @defaultValue false
      */
-    const registerInProcess: Ref<boolean> = ref(false)
+    const registerInProcess: Ref<boolean> = ref(false);
 
     /**
      * Реактивная ссылка на текущий активный шаг формы
      *
      * @defaultValue 1
      */
-    const currentStep: Ref<TStepKey> = ref(1)
+    const currentStep: Ref<TRegisterStepKey> = ref(1);
 
     /**
      * Вычисляемое свойство, возвращающее процент заполнения формы в виде строки
@@ -172,9 +176,9 @@ export function useRegisterForm(): IRegisterFormComposable {
      * progressPercentage.value // "33", "66", "100"
      * ```
      */
-    const progressPercentage: ComputedRef<string> = computed(
-        () => ((currentStep.value / MAX_REGISTER_STEP) * 100).toFixed(0)
-    )
+    const progressPercentage: ComputedRef<number> = computed(() =>
+        Math.round((currentStep.value / MAX_REGISTER_STEP) * 100),
+    );
 
     /**
      * Переходит к следующему шагу формы, если это возможно
@@ -188,9 +192,9 @@ export function useRegisterForm(): IRegisterFormComposable {
      */
     const nextStep = (): void => {
         if (currentStep.value < MAX_REGISTER_STEP) {
-            currentStep.value++
+            currentStep.value++;
         }
-    }
+    };
 
     /**
      * Возвращает к предыдущему шагу формы, если это возможно
@@ -202,9 +206,9 @@ export function useRegisterForm(): IRegisterFormComposable {
      */
     const prevStep = (): void => {
         if (currentStep.value > MIN_REGISTER_STEP) {
-            currentStep.value--
+            currentStep.value--;
         }
-    }
+    };
 
     return {
         registerFormData,
@@ -216,6 +220,6 @@ export function useRegisterForm(): IRegisterFormComposable {
         prevStep,
         currentStep,
         stepFormData,
-        progressPercentage
-    }
+        progressPercentage,
+    };
 }

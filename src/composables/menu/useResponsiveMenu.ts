@@ -1,8 +1,10 @@
-import { MENU_STORAGE_KEY, useMenuState } from '@/stores/menu.ts'
-import { getValueByKey } from '@/utils/localStorage.ts'
-import { WIDTH_FOR_COLLAPSE_MENU } from '@/consts'
-import type { IResponsibleMenuComposable } from '@/interfases/menu.ts'
-import { DEBOUNCE_RESIZE_HANDLER_MS } from '@/consts/menu.ts'
+import { MENU_STORAGE_KEY, useMenuState } from "@/stores/menu.ts";
+import { getValueByKey } from "@/utils/localStorage.ts";
+import { WIDTH_FOR_COLLAPSE_MENU } from "@/consts";
+import type { IResponsibleMenuComposable } from "@/interfases/menu.ts";
+import { DEBOUNCE_RESIZE_HANDLER_MS } from "@/consts/menu.ts";
+import { debounce } from "@/utils/performance.ts";
+import { isClient } from "@/utils/environment.ts";
 
 /**
  * Vue 3 Composition API функция для управления адаптивным поведением меню
@@ -43,7 +45,7 @@ export function useResponsiveMenu(): IResponsibleMenuComposable {
      * @remarks
      * Содержит текущее состояние свернутости меню и функцию для его изменения
      */
-    const { collapsed, setCollapsed } = useMenuState()
+    const { collapsed, setCollapsed } = useMenuState();
 
     /**
      * Проверяет и обновляет состояние свернутости меню на основе ширины экрана
@@ -62,21 +64,23 @@ export function useResponsiveMenu(): IResponsibleMenuComposable {
      * ```
      */
     const checkMenuCollapseState = (): void => {
-        const isWideScreen = window.innerWidth > WIDTH_FOR_COLLAPSE_MENU
+        if (!isClient()) return;
+
+        const isWideScreen = window.innerWidth > WIDTH_FOR_COLLAPSE_MENU;
 
         if (isWideScreen) {
             // На широких экранах: восстанавливаем сохраненное состояние
-            const savedState = getValueByKey<boolean>(MENU_STORAGE_KEY, collapsed)
+            const savedState = getValueByKey<boolean>(MENU_STORAGE_KEY, collapsed);
             if (collapsed !== savedState) {
-                setCollapsed(savedState)
+                setCollapsed(savedState);
             }
         } else {
             // На узких экранах: принудительно сворачиваем меню
             if (!collapsed) {
-                setCollapsed(true)
+                setCollapsed(true);
             }
         }
-    }
+    };
 
     /**
      * Обработчик события изменения размера окна
@@ -88,8 +92,8 @@ export function useResponsiveMenu(): IResponsibleMenuComposable {
      * @private
      */
     const handleResize = debounce((): void => {
-        checkMenuCollapseState()
-    }, DEBOUNCE_RESIZE_HANDLER_MS)
+        checkMenuCollapseState();
+    }, DEBOUNCE_RESIZE_HANDLER_MS);
 
     /**
      * Инициализирует систему адаптивного меню
@@ -108,9 +112,11 @@ export function useResponsiveMenu(): IResponsibleMenuComposable {
      * ```
      */
     const initResponsiveMenu = (): void => {
-        checkMenuCollapseState()
-        window.addEventListener('resize', handleResize)
-    }
+        if (!isClient()) return;
+
+        checkMenuCollapseState();
+        window.addEventListener("resize", handleResize);
+    };
 
     /**
      * Очищает ресурсы и удаляет слушатели событий
@@ -127,12 +133,12 @@ export function useResponsiveMenu(): IResponsibleMenuComposable {
      * ```
      */
     const cleanup = (): void => {
-        window.removeEventListener('resize', handleResize)
-    }
+        window.removeEventListener("resize", handleResize);
+    };
 
     return {
         checkMenuCollapseState,
         initResponsiveMenu,
-        cleanup
-    }
+        cleanup,
+    };
 }

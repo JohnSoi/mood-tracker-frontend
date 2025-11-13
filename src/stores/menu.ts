@@ -1,13 +1,13 @@
-import { defineStore } from 'pinia'
-import { type Ref, ref } from 'vue'
-import { getValueByKey, setValueByKey } from '@/utils/localStorage.ts'
+import { defineStore } from "pinia";
+import { type Ref, ref } from "vue";
+import { getValueByKey, setValueByKey } from "@/utils/localStorage.ts";
 
 /**
  * Ключ для хранения состояния меню в localStorage
  * @constant {string}
  * @default 'menuCollapsed'
  */
-const MENU_STORAGE_KEY: string = 'menuCollapsed';
+const MENU_STORAGE_KEY: string = "menuCollapsed";
 
 /**
  * Store для управления состоянием бокового меню
@@ -40,7 +40,7 @@ const MENU_STORAGE_KEY: string = 'menuCollapsed';
  *   </div>
  * </template>
  */
-const useMenuState = defineStore('menuState', () => {
+const useMenuState = defineStore("menuState", () => {
     /**
      * Реактивная ссылка на состояние свернутости меню
      * @type {Ref<boolean>}
@@ -87,15 +87,15 @@ const useMenuState = defineStore('menuState', () => {
      * @returns {void}
      */
     function toggleCollapsed(): void {
-        collapsed.value = !collapsed.value
-        setValueByKey<boolean>(MENU_STORAGE_KEY, collapsed.value)
+        collapsed.value = !collapsed.value;
+        setValueByKey<boolean>(MENU_STORAGE_KEY, collapsed.value);
     }
 
     function setCollapsed(value: boolean): void {
         collapsed.value = value;
     }
 
-    return { collapsed, toggleCollapsed, setCollapsed }
-})
+    return { collapsed, toggleCollapsed, setCollapsed };
+});
 
 export { useMenuState, MENU_STORAGE_KEY };

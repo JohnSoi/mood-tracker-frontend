@@ -1,29 +1,21 @@
 <script setup lang="ts">
-import {
-    IftaLabel,
-    IconField,
-    InputIcon,
-    InputText,
-    Button,
-    SelectButton,
-    DatePicker,
-} from 'primevue'
-import { type Ref, ref } from 'vue'
-import LoginForm from '@/components/form/auth/LoginForm.vue'
-import RegisterForm from '@/components/form/auth/RegisterForm.vue'
+import { SelectButton } from "primevue";
+import { type Ref, ref } from "vue";
+import LoginForm from "@/components/form/auth/LoginForm.vue";
+import RegisterForm from "@/components/form/auth/RegisterForm.vue";
 
-const currentViewForm: Ref<'login' | 'register'> = ref('login')
-const viewOptions: Ref<{ value: 'login' | 'register'; name: string }[]> = ref([
-    { value: 'login', name: 'Вход' },
-    { value: 'register', name: 'Регистрация' },
-])
+const currentViewForm: Ref<"login" | "register"> = ref("login");
+const viewOptions: Ref<{ value: "login" | "register"; name: string }[]> = ref([
+    { value: "login", name: "Вход" },
+    { value: "register", name: "Регистрация" },
+]);
 const changeViewForm = (): void => {
-    if (currentViewForm.value === 'register') {
-        currentViewForm.value = 'login';
+    if (currentViewForm.value === "register") {
+        currentViewForm.value = "login";
     } else {
-        currentViewForm.value = 'register';
+        currentViewForm.value = "register";
     }
-}
+};
 </script>
 
 <template>

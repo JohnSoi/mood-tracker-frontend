@@ -1,5 +1,14 @@
-import type { Ref } from 'vue'
-import type { IMenuItem } from '@/interfases/index.ts'
+import type { Ref } from "vue";
+import type { Component } from "vue";
+
+interface IMenuItem {
+    label: string;
+    id: string;
+    icon: string;
+    path: string;
+    component: () => Promise<Component>;
+    public?: boolean;
+}
 
 interface IMenuItemsComposable {
     items: Ref<IMenuItem[]>;
@@ -12,7 +21,4 @@ interface IResponsibleMenuComposable {
     cleanup: () => void;
 }
 
-export type {
-    IMenuItemsComposable,
-    IResponsibleMenuComposable,
-}
+export type { IMenuItem, IMenuItemsComposable, IResponsibleMenuComposable };

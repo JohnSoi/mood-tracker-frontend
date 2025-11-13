@@ -1,7 +1,6 @@
-import { ref, type Ref, watch } from 'vue'
-import { useAuthState } from '@/stores/auth.ts'
-import type { IMenuItem } from '@/interfases'
-import type { IMenuItemsComposable } from '@/interfases/menu.ts'
+import { ref, type Ref, watch } from "vue";
+import { useAuthState } from "@/stores/auth.ts";
+import type { IMenuItem, IMenuItemsComposable } from "@/interfases/menu";
 
 /**
  * Vue 3 Composition API функция для управления элементами меню с учетом авторизации
@@ -39,7 +38,7 @@ export function useMenuItems(initialItems: IMenuItem[]): IMenuItemsComposable {
      * @remarks
      * Используется для проверки статуса авторизации пользователя и отслеживания его изменений
      */
-    const authState = useAuthState()
+    const authState = useAuthState();
 
     /**
      * Реактивный массив отфильтрованных элементов меню
@@ -48,7 +47,7 @@ export function useMenuItems(initialItems: IMenuItem[]): IMenuItemsComposable {
      * Содержит только те элементы, которые доступны текущему пользователю
      * на основе его статуса аутентификации и флага `public` каждого элемента
      */
-    const items: Ref<IMenuItem[]> = ref([...initialItems])
+    const items: Ref<IMenuItem[]> = ref([...initialItems]);
 
     /**
      * Фильтрует элементы меню на основе статуса аутентификации пользователя
@@ -68,10 +67,8 @@ export function useMenuItems(initialItems: IMenuItem[]): IMenuItemsComposable {
      * ```
      */
     const filterMenuItems = (): IMenuItem[] => {
-        return initialItems.filter(menuItem =>
-            menuItem.public || authState.userAuthenticate
-        )
-    }
+        return initialItems.filter((menuItem) => menuItem.public || authState.userAuthenticate);
+    };
 
     /**
      * Обновляет реактивный список элементов меню
@@ -81,8 +78,8 @@ export function useMenuItems(initialItems: IMenuItem[]): IMenuItemsComposable {
      * Может быть полезен для ручного обновления при изменении прав пользователя
      */
     const updateMenuItems = (): void => {
-        items.value = filterMenuItems()
-    }
+        items.value = filterMenuItems();
+    };
 
     /**
      * Наблюдатель за изменением статуса аутентификации пользователя
@@ -94,12 +91,12 @@ export function useMenuItems(initialItems: IMenuItem[]): IMenuItemsComposable {
     watch(
         () => authState.userAuthenticate,
         () => {
-            updateMenuItems()
-        }
-    )
+            updateMenuItems();
+        },
+    );
 
     return {
         items,
-        updateMenuItems
-    }
+        updateMenuItems,
+    };
 }

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { IMenuItem } from '@/interfases';
-import BaseMenu from '@/components/ui/BaseMenu.vue'
+import type { IMenuItem } from "@/interfases/menu";
+import BaseMenu from "@/components/ui/BaseMenu.vue";
 
 defineProps<{
     menuItems: IMenuItem[];
@@ -9,9 +9,9 @@ defineProps<{
 </script>
 <template>
     <div class="BaseLayout__wrapper full-size flex p-md">
-        <BaseMenu :menu-items="menuItems"/>
+        <BaseMenu :menu-items="menuItems" />
         <div class="flex flex-center p-xs full-size">
-            <router-view/>
+            <router-view />
         </div>
     </div>
 </template>

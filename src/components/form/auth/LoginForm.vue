@@ -1,14 +1,10 @@
 <script setup lang="ts">
-import { Button, IconField, IftaLabel, InputIcon, InputText, Password } from 'primevue';
-import { useLoginForm } from '@/composables/auth/useLoginForm.ts'
+import { Button, IconField, IftaLabel, InputIcon, InputText, Password } from "primevue";
+import { useLoginForm } from "@/composables/auth/useLoginForm.ts";
 
-const {
-    loginFormData,
-    authInProcess,
-    login
-} = useLoginForm();
+const { loginFormData, authInProcess, login } = useLoginForm();
 
-defineEmits(['changeView'])
+defineEmits(["changeView"]);
 </script>
 
 <template>
@@ -67,11 +63,7 @@ defineEmits(['changeView'])
             <div class="half-size-w flex flex-jc-center mt-sm text-xs">
                 <span
                     >Еще не следите за настроением?
-                    <span
-                        class="transition link-hovered cursor-pointer"
-                        @click="$emit('changeView')"
-                        >Начать!</span
-                    >
+                    <span class="transition link-hovered cursor-pointer" @click="$emit('changeView')">Начать!</span>
                 </span>
             </div>
         </div>
@@ -79,7 +71,7 @@ defineEmits(['changeView'])
 </template>
 
 <style scoped>
-.LoginForm__content{
+.LoginForm__content {
     background-color: var(--secondary-background-color);
 }
 
