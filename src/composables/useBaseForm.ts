@@ -1,7 +1,7 @@
 import { computed, type Ref, ref } from "vue";
 import type { IBaseFormComposable, IFormBtnConfig, IFormData, IFormItem } from "@/interfases/form";
-import { EMAIL_REG_EXP } from "@/consts/form.ts";
-import { EmailValidator } from "@/validators/email.ts";
+import { EmailValidator } from "@/validators/email";
+import { StringValidator } from "@/validators/string";
 
 /**
  * Vue 3 Composition API функция для управления базовой формой с валидацией
@@ -44,7 +44,7 @@ import { EmailValidator } from "@/validators/email.ts";
  */
 export const useBaseForm = (
     props: IFormData,
-    emits: (event: "stepErrorCheck" | "stepEndCheck", ...args: unknown[]) => void
+    emits: (event: "stepErrorCheck" | "stepEndCheck", ...args: unknown[]) => void,
 ): IBaseFormComposable => {
     /**
      * Объект значений полей формы
@@ -148,28 +148,32 @@ export const useBaseForm = (
         let errors: string[] = [];
         let fieldValue: string | Date = values[field.id] as string | Date;
 
-        // Тримминг строковых значений
-        if (typeof fieldValue === "string") {
-            fieldValue = fieldValue.trim();
+        // Проверим значение как строку
+        const strValidator: StringValidator = new StringValidator(
+            fieldValue,
+            field.minLength,
+            field.maxLength,
+            field.required || false,
+            field.label,
+        );
+
+        // Установка обработанного занчения как строки
+        if (strValidator.get()) {
+            fieldValue = strValidator.get();
         }
 
-        // Проверка обязательности заполнения
-        if (field.required && !fieldValue) {
-            errors.push(`Поле "${field.label}" обязательно для заполнения`);
-            return errors;
+        // Полная проверка валидности строки
+        if (!strValidator.isValid()) {
+            errors = strValidator.getErrors();
         }
 
-        // Проверка минимальной длины (только для строк)
-        if (fieldValue && typeof fieldValue === "string" && field.minLength && fieldValue.length < field.minLength) {
-            errors.push(`Поле "${field.label}" должно быть не меньше ${field.minLength} символов`);
-        }
-
-        // Проверка максимальной длины (только для строк)
-        if (fieldValue && typeof fieldValue === "string" && field.maxLength && fieldValue.length > field.maxLength) {
-            errors.push(`Поле "${field.label}" должно быть не более ${field.maxLength} символов`);
-        }
-
-        if (field.type === "email" && fieldValue && typeof fieldValue === "string" && EmailValidator.isValid(fieldValue)) {
+        // Проверка значения Email
+        if (
+            field.type === "email" &&
+            fieldValue &&
+            typeof fieldValue === "string" &&
+            EmailValidator.isValid(fieldValue)
+        ) {
             errors.push("Некорректный формат email");
         }
 
@@ -279,6 +283,6 @@ export const useBaseForm = (
         values,
         btnIsLoading,
         fieldErrors,
-        validateAndNext
+        validateAndNext,
     };
 };

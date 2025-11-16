@@ -23,4 +23,16 @@ function getValueByKey<TValue>(key: string, defaultValue: TValue): TValue {
     }
 }
 
-export { getValueByKey, setValueByKey };
+function deleteValueByKey(key: string): boolean {
+    const valueExist: boolean = localStorage.getItem(key) !== null;
+
+    if (!valueExist) {
+        return false;
+    }
+
+    localStorage.removeItem(key);
+
+    return true;
+}
+
+export { getValueByKey, setValueByKey, deleteValueByKey };

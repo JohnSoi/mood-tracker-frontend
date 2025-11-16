@@ -23,7 +23,7 @@ const validateStepEnd: TValidateStepEnd = (step: TRegisterStepKey, stepDisable: 
     <div class="RegisterForm__wrapper full-size flex">
         <div class="RegisterForm__content half-size-w">
             <Stepper :value="currentStep" class="full-size flex flex-column">
-                <StepList>
+                <StepList class="overflow-hidden">
                     <Step
                         :value="index"
                         v-for="index in Object.keys(registerFormController.stepFormData).map(Number) as TRegisterStepKey[]"

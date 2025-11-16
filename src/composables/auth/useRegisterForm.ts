@@ -12,6 +12,8 @@ import {
 } from "@/consts/auth.ts";
 import type { IRegisterFormComposable, IRegisterFormData, TRegisterStepKey } from "@/interfases/auth.ts";
 import { getSubtractYearFromCurrentDate } from "@/utils/date.ts";
+import type { SourceService } from "@/services/source.ts";
+import { ServiceFactory } from "@/services/serviceFactory.ts";
 
 /**
  * Vue 3 Composition API функция для управления многошаговой формой регистрации
@@ -61,7 +63,15 @@ export function useRegisterForm(): IRegisterFormComposable {
     const registerFormData: Ref<IRegisterFormData> = ref({
         ...BASE_REGISTER_DATA,
         date_birthday: minBirthdayValue,
-    });
+    })
+
+    /**
+     * Источник для запросов аутентификации
+     *
+     * @remarks
+     * Через фабрику сервисов создает точку входа запросов аутентификации
+     */
+    const authService: SourceService = ServiceFactory.createAuthService();
 
     /**
      * Выполняет процесс регистрации пользователя
@@ -78,9 +88,12 @@ export function useRegisterForm(): IRegisterFormComposable {
      */
     const register = async (formValue: IRegisterFormData): Promise<void> => {
         registerInProcess.value = true;
-        setTimeout(() => {
-            registerInProcess.value = false;
-        }, 1000);
+        await authService.call<IRegisterFormData, {AccessToken: string, RefreshToken: string}>(
+            'POST',
+            '/register',
+            formValue,
+        );
+        registerInProcess.value = false;
     };
 
     /**

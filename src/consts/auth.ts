@@ -98,7 +98,7 @@ const REGISTER_STEP_1_FORM_DATA = (
     callback: TFormBtnCallback,
 ): IStepFormData => {
     return {
-        title: "Расскажите о себе",
+        title: "О себе",
         items: [
             {
                 id: "name",
@@ -178,7 +178,7 @@ const REGISTER_STEP_2_FORM_DATA = (
     nextCallback: TFormBtnCallback
 ): IStepFormData => {
     return {
-        title: "Данные для входа",
+        title: "Вход",
         items: [
             {
                 id: "login",
@@ -264,7 +264,7 @@ const REGISTER_STEP_2_FORM_DATA = (
  */
 const REGISTER_STEP_3_FORM_DATA = (nextCallback: TFormBtnCallback): IStepFormData => {
     return {
-        title: "Настройки приватности",
+        title: "Приватность",
         items: [
             {
                 id: "default_post_visible",
@@ -363,6 +363,42 @@ const MAX_REGISTER_STEP: number = 3;
  */
 const MIN_REGISTER_STEP: number = 1;
 
+/**
+ * Имя поля в локальном хранилище, котором лежит токен доступа
+ *
+ * @constant
+ * @type {string}
+ * @default "access_token"
+ *
+ * @remarks
+ * Используется для работы с токеном доступа в локальном хранилище
+ *
+ * @example
+ * ```typescript
+ * // Получить токен доступа из локального хранилища
+ * getValueByKey(ACCESS_TOKEN_LOCAL_STORAGE_KEY)
+ * ```
+ */
+const ACCESS_TOKEN_LOCAL_STORAGE_KEY: string = "access_token";
+
+/**
+ * Имя поля в локальном хранилище, котором лежит токен обновления
+ *
+ * @constant
+ * @type {string}
+ * @default "access_token"
+ *
+ * @remarks
+ * Используется для работы с токеном обновления в локальном хранилище
+ *
+ * @example
+ * ```typescript
+ * // Получить токен обновления из локального хранилища
+ * getValueByKey(REFRESH_TOKEN_LOCAL_STORAGE_KEY)
+ * ```
+ */
+const REFRESH_TOKEN_LOCAL_STORAGE_KEY: string = "refresh_token";
+
 export {
     MIN_REGISTER_YEAR,
     MAX_REGISTER_YEAR,
@@ -372,4 +408,6 @@ export {
     REGISTER_STEP_3_FORM_DATA,
     MAX_REGISTER_STEP,
     MIN_REGISTER_STEP,
+    ACCESS_TOKEN_LOCAL_STORAGE_KEY,
+    REFRESH_TOKEN_LOCAL_STORAGE_KEY
 };

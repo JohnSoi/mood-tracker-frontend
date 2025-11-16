@@ -24,6 +24,12 @@ const routes: IRouteRecordRaw[] = [
         component: () => import("@/views/LoginView.vue"),
         meta: { public: true, title: 'Аутентификация' },
         name: "login"
+    },
+    {
+        path: "/forgot-password",
+        component: () => import("@/views/ForgotPassword.vue"),
+        meta: { public: true, title: 'Восстановление пароля'},
+        name: "forgotPassword"
     }
 ];
 
@@ -31,9 +37,17 @@ for (const item of MENU_ITEMS) {
     routes.push({
         path: item.path,
         component: item.component,
-        name: item.id
+        name: item.id,
+        meta: {title: item.label}
     });
 }
+
+routes.push({
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('@/views/NotFoundPage.vue'),
+    meta: {title: "Мы ничего не нашли :("}
+})
 
 const router: Router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
